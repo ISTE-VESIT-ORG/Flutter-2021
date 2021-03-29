@@ -1,5 +1,5 @@
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Details
 This branch will explain the basics of Color and Font widget in flutter.
 
 Even how to add google fonts is explained datiled .
