@@ -22,6 +22,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+
 class QuoteList extends StatefulWidget {
   @override
   _QuoteListState createState() => _QuoteListState();
@@ -29,9 +31,9 @@ class QuoteList extends StatefulWidget {
 
 class _QuoteListState extends State<QuoteList> {
   List<Quote> quotes = [
-    Quote(author: 'No one can make you feel inferior without your consent.', text: 'Eleanor Roosevelt'),
-    Quote(author: 'Not all those who wander are lost.', text: 'J. R. R. Tolkein'),
-    Quote(author: 'A rose by any other name would smell as sweet.	', text: 'William Shakespeare'),
+    Quote( text: 'No one can make you feel inferior without your consent.', author: 'Eleanor Roosevelt'),
+    Quote( text: 'Not all those who wander are lost.', author: 'J. R. R. Tolkein'),
+    Quote( text: 'A rose by any other name would smell as sweet.	', author : 'William Shakespeare'),
   ];
 
   @override
