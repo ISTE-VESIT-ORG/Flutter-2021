@@ -32,6 +32,14 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+Basics of dart language is there in Dart pad code.docx
+1. Hello program
+2. Function
+3. List
+4. Add and remove a list
+5. Class and class inheritance
+
+Basic flutter project using cmd code flutter create project name.
 ### Built With
 * [Flutter](https://flutter.dev/docs)
 
@@ -45,6 +53,7 @@ A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [Dart Pad](https://dartpad.dev/?null_safety=true)
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
