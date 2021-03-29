@@ -39,8 +39,8 @@ For stateful widget explanation a button was created with delete property.
 A list was created with some quotes and there respective author name.
 
 Using the concept of list and method of staeful widget the quotes and respective quthor name can be deleted.
-##### Stortcut key for stateful widget
-stless
+##### Shortcut key for stateful widget
+stful
 
 ### Built With
 * [Flutter](https://flutter.dev/docs)
