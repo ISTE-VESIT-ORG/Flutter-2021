@@ -1,60 +1,71 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:start/quote.dart';
-import 'package:start/quote_card.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
-
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: QuoteList(),
+      home: MyHomePage(),
     );
   }
 }
 
-
-
-class QuoteList extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
   @override
-  _QuoteListState createState() => _QuoteListState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _QuoteListState extends State<QuoteList> {
-  List<Quote> quotes = [
-    Quote( text: 'No one can make you feel inferior without your consent.', author: 'Eleanor Roosevelt'),
-    Quote( text: 'Not all those who wander are lost.', author: 'J. R. R. Tolkein'),
-    Quote( text: 'A rose by any other name would smell as sweet.	', author : 'William Shakespeare'),
-  ];
+class _MyHomePageState extends State<MyHomePage> {
+  Dio dio = new Dio();
+  Future postData() async {
+    final String pathurl = "http://10.0.2.2:8000/prediction";
+    dynamic data = {"message": "bye"};
+    var response = await dio.post(pathurl,
+        data: data,
+        options: Options(headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        }));
+
+    return response.data;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        title: Text('Awesome Quotes'),
-        centerTitle: true,
-        backgroundColor: Colors.redAccent,
-      ),
-      body: Column(
-        children: quotes.map((quote) {
-          return QuoteCard(
-              quote: quote,
-              delete: () {
-                setState(() {
-                  quotes.remove(quote);
-                });
-              });
-        }).toList(),
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(backgroundColor: Colors.black),
+      body: Center(
+        child: MaterialButton(
+          color: Colors.black,
+          onPressed: () async {
+            print('Posting data');
+            await postData().then((value) {
+              print(value);
+            });
+          },
+          child: Text(
+            'post',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
       ),
     );
   }
