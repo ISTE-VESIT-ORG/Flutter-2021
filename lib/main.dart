@@ -1,5 +1,7 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp());
@@ -34,39 +36,57 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Dio dio = new Dio();
-  Future postData() async {
-    final String pathurl = "http://10.0.2.2:8000/prediction";
-    dynamic data = {"message": "bye"};
-    var response = await dio.post(pathurl,
-        data: data,
-        options: Options(headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        }));
+  getUserData() async {
+    var response =
+        await http.get(Uri.https('jsonplaceholder.typicode.com', 'users'));
+    var jsonData = jsonDecode(response.body);
+    List<User> users = [];
 
-    return response.data;
+    for (var u in jsonData) {
+      User user = User(u["name"], u["email"], u["username"]);
+      users.add(user);
+    }
+    print(users.length);
+    return users;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(backgroundColor: Colors.black),
-      body: Center(
-        child: MaterialButton(
-          color: Colors.black,
-          onPressed: () async {
-            print('Posting data');
-            await postData().then((value) {
-              print(value);
-            });
-          },
-          child: Text(
-            'post',
-            style: TextStyle(color: Colors.white),
+      appBar: AppBar(
+        title: Text('Api'),
+      ),
+      body: Container(
+        child: Card(
+          child: FutureBuilder(
+            future: getUserData(),
+            builder: (context, snapshot) {
+              if (snapshot.data == null) {
+                return Container(
+                  child: Center(
+                    child: Text('Loading'),
+                  ),
+                );
+              } else
+                return ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, i) {
+                      return ListTile(
+                        title: Text(snapshot.data[i].name),
+                        subtitle: Text(snapshot.data[i].username),
+                        trailing: Text(snapshot.data[i].email),
+                      );
+                    });
+            },
           ),
         ),
       ),
     );
   }
+}
+
+class User {
+  final String name, email, username;
+
+  User(this.name, this.email, this.username);
 }
