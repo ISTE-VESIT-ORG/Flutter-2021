@@ -39,7 +39,7 @@ For stateful widget explanation a button was created with delete property.
 A list was created with some quotes and there respective author name.
 
 Using the concept of list and method of staeful widget the quotes and respective quthor name can be deleted.
-##### stortcut key for stateful widget
+##### Stortcut key for stateful widget
 stless
 
 ### Built With
